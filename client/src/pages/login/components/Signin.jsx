@@ -6,7 +6,7 @@ export default class Signin extends Component {
     super(props);
     this.state = {
       email: '',
-      password: '',
+      password: ''
     }
     this.handlePassword = this.handlePassword.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
@@ -49,16 +49,14 @@ export default class Signin extends Component {
           onChange={this.handleEmail}
           ref={(emailField) => this.emailField = emailField}
           onKeyDown={this.keyQuery}
-          autoFocus={true}
-          />
+          autoFocus={true}/>
         <TextField
           floatingLabelText="Password"
           value={this.state.password}
           type="password"
           onChange={this.handlePassword}
           ref={(passwordField) => this.passwordField = passwordField}
-          onKeyDown={this.keyQuery}
-          />
+          onKeyDown={this.keyQuery}/>
         <RaisedButton label="Submit" onClick={this.handleSubmit} />
       </div>
     );

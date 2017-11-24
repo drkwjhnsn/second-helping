@@ -50,3 +50,31 @@ body {
   height: 100%;
   flex-grow: 1;
 }
+
+.FoodList-container {
+
+}
+
+.FoodList-button-cluster {
+  display: flex;
+  justify-content: space-around;
+  margin: 2vh 2vw;
+}
+
+/*.add-food-button > * {
+  margin-right: 5vw;
+}*/
+
+.FoodItem-container {
+  margin: 1vh 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.FoodItem-container > * {
+  margin: 0 2vw;
+  flex-shrink: 0;
+  flex-grow: 1;
+}

@@ -7,10 +7,13 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js(x)?$/,
+        test: /\.jsx?$/,
 	include: __dirname + '/client/src',
 	loader: 'babel-loader'
       }
     ]
+  },
+  watchOptions: {
+    poll: true
   }
 };

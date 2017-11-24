@@ -10,8 +10,8 @@ user.get('/', (req, res) => {
 });
 
 user.post('/', (req, res) => {
-  var { username, type } = req.body;
-  new User({username, type}).save()
+  var { email, type } = req.body;
+  new User({email, type}).save()
   .then((user) => {
     res.status(200).end(`${user.toJSON().id}`);
   })

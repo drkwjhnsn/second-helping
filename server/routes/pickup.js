@@ -1,4 +1,5 @@
 var pickup = require('express').Router();
+var Promise = require('bluebird');
 var { Pickup } = require('../models');
 
 pickup.get('/', (req, res) => {

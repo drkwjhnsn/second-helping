@@ -3,6 +3,7 @@ import FoodItem from './FoodItem.jsx';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentDelete from 'material-ui/svg-icons/content/remove';
 import ContentSubmit from 'material-ui/svg-icons/content/send';
+import ContentCancel from 'material-ui/svg-icons/content/clear';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Paper from 'material-ui/paper';
 
@@ -34,12 +35,12 @@ export default class FoodList extends Component {
 
   deleteFood() {
     var prevFoods = this.state.foods;
-    var newFoods = prevFoods.slice(0, prevFoods.length - 1 || 1 );
-    this.setState({ foods: newFoods })
+    var newFoods = prevFoods.slice(0, prevFoods.length - 1 || 1);
+    this.setState({ foods: newFoods });
   }
 
   submitFoods() {
-
+    this.props.submit(this.state.foods);
   }
 
   render() {
@@ -51,7 +52,10 @@ export default class FoodList extends Component {
           <FloatingActionButton onClick={this.deleteFood}>
             <ContentDelete />
           </FloatingActionButton >
-          <FloatingActionButton onClick={this.addFood}>
+          <FloatingActionButton onClick={this.props.cancel}>
+            <ContentCancel />
+          </FloatingActionButton >
+          <FloatingActionButton onClick={this.submitFoods}>
             <ContentSubmit />
           </FloatingActionButton >
           <FloatingActionButton onClick={this.addFood}>

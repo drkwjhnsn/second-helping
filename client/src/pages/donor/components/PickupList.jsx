@@ -4,7 +4,7 @@ import Paper from 'material-ui/paper';
 
 
 module.exports = (props) => (
-    <Paper>
+    <Paper className="PickupList-container">
       { props.pickups.map((pickup) => <PickupFoodList {...pickup} />)}
     </Paper>
   )

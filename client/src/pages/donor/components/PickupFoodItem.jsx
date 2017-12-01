@@ -13,11 +13,11 @@ export default class PickupItem extends Component {
   render() {
     var { description, quantity, expiry } = this.props;
     return (
-      <div>
-        <span>{description} </span>
-        <span>{quantity}</span>
-        <span>{expiry}</span>
-      </div>
+      <tr className="PickupFoodItem-container">
+        <td>{description}</td>
+        <td>{quantity}</td>
+        <td>{expiry}</td>
+      </tr>
     )
   }
 }

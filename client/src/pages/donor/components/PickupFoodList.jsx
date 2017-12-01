@@ -7,7 +7,9 @@ module.exports = (props) => {
   var { foods } = props;
   return (
     <Paper>
-      { props.foods.map((food) => (<PickupFoodItem { ...food } />))}
+      <table className="PickupFoodList-container">
+        { props.foods.map((food) => (<PickupFoodItem { ...food } />))}
+      </table>
     </Paper>
   )
 };

@@ -6,6 +6,7 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      type: 'DONOR',
       address: '',
       city: '',
       state: '',
@@ -14,6 +15,7 @@ export default class Signup extends Component {
       password: '',
       confirm: '',
     }
+    this.handleType = this.handleType.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
@@ -24,6 +26,11 @@ export default class Signup extends Component {
     this.obscure = this.obscure.bind(this);
     this.keyQuery = this.keyQuery.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleType(e) {
+    var type = e.target.value;
+    this.setState({ type });
   }
 
   handleAddress(e) {
@@ -67,6 +74,7 @@ export default class Signup extends Component {
 
   clearFields() {
     this.setState({
+        type: 'DONOR',
         address: '',
         city: '',
         state: '',
@@ -75,6 +83,10 @@ export default class Signup extends Component {
         password: '',
         confirm: ''
       });
+    this.addressField.value = '';
+    this.cityField.value = '';
+    this.stateField.value = '';
+    this.zipField.value = '';
     this.emailField.value = '';
     this.passwordField.value = '';
     this.confirmField.value = '';
@@ -85,15 +97,18 @@ export default class Signup extends Component {
   }
 
   handleSubmit() {
-    var { address, city, state, zip, email, password } = this.state;
-    this.props.signup(address, city, state, zip, email, password);
+    var { type, address, city, state, zip, email, password } = this.state;
+    this.props.signup(type, address, city, state, zip, email, password);
     this.clearFields();
   }
 
   render() {
     return (
       <div className="signup">
-        <RadioButtonGroup name="accountType">
+        <RadioButtonGroup
+          name="accountType"
+          valueSelected={this.state.type}
+          onChange={this.handleType}>
           <RadioButton
             value="DONOR"
             label="Donor"

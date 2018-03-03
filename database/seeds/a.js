@@ -7,6 +7,8 @@ exports.seed = function(knex, Promise) {
       return knex('users').insert([
         {
           name: 'The Fat Lady',
+          lat: 37.796623,
+          lng: -122.277830,
           address: '201 Washington St',
           city: 'Oakland',
           state: 'CA',
@@ -18,6 +20,8 @@ exports.seed = function(knex, Promise) {
         },
         {
           name: 'Lake Merrit Food Bank',
+          lat: 37.801162,
+          lng: -122.265438,
           address: '184 13th st',
           city: 'Oakland',
           state: 'CA',

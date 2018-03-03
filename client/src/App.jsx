@@ -48,13 +48,10 @@ export default class App extends Component {
     confirmAddress({ address, city, state, zip })
     .then(({ data }) => {
       if (!data.results[0]) return console.log('Address not confirmed!');
-      console.log('data:\n', data);
       var location = data.results[0].geometry.location;
       var { lat, lng } = location;
-      console.log('lat: ', lat, '\nlng: ', lng);
       axios.post('/auth/signup', { type, name, address, city, state, zip, email, password, lat, lng })
       .then(({ data }) => {
-        console.log(data);
         this.setState({ user: data });
         this.handleClose();
       });

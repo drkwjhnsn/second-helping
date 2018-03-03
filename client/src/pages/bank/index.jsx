@@ -28,35 +28,34 @@ export default class Bank extends Component {
     this.state.claims.forEach((claim, idx) => {
       // axios.get(`https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadowchld=A|FF0000|0000FF`)
       // .then
-      // claimPins.push(
-      //   new google.maps.Marker({
-      //     position: {lat: claim.address.lat, lng: claim.address.lng},
-      //     map: this.map
-      //   })
-      // )
+      claimPins.push(
+        new google.maps.Marker({
+          position: {lat: claim.donor.lat, lng: claim.donor.lng},
+          map: this.map
+        })
+      )
     });
-    // this.setState({claimPins});
+    this.setState({claimPins});
   }
 
   setPickupPins() {
-    // var pickupPins = [];
-    // this.state.pickups.forEach((pickup, idx) => {
-    //   pickupPins.push(
-    //     new google.maps.Marker({
-    //       position: {lat: pickup.address.lat, lng: pickup.address.lng},
-    //       map: this.map
-    //     })
-    //   )
-    // });
-    // this.setState({pickupPins});
+    var pickupPins = [];
+    console.log(this.state.pickups);
+    this.state.pickups.forEach((pickup, idx) => {
+      pickupPins.push(
+        new google.maps.Marker({
+          position: {lat: pickup.donor.lat, lng: pickup.donor.lng},
+          map: this.map
+        })
+      );
+    });
+    this.setState({pickupPins});
   }
 
   componentDidMount() {
     var { lat, lng } = this.props.user;
    this.map = new google.maps.Map(document.getElementById('map'),
     {center: { lat, lng }, zoom: 12});
-    this.setPickupPins();
-    // this.setClaimPins();
   }
 
   fetchPickups() {
@@ -66,7 +65,7 @@ export default class Bank extends Component {
       var pickups = data.filter((pickup) => !pickup.bank_id)
       var claims = data.filter((claim) => claim.bank_id)
       this.setState({ pickups, claims });
-      // this.setPickupPins();
+      this.setPickupPins();
     });
   }
 

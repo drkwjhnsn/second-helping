@@ -19,6 +19,16 @@ export default class FoodList extends Component {
     this.handleItemChange = this.handleItemChange.bind(this);
   }
 
+  componentDidMount() {
+    this.buttons.scrollIntoView();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.foods.length < this.state.foods.length) {
+      this.buttons.scrollIntoView();
+    }
+  }
+
   handleItemChange(no, field, e) {
     var prevFoods = this.state.foods;
     var newFoods = [...prevFoods];
@@ -47,20 +57,26 @@ export default class FoodList extends Component {
     var { foods } = this.state;
     return (
       <div className="FoodList-container">
-        { foods.map((food, idx) => <FoodItem {...food} key={idx} no={idx} handleItemChange={this.handleItemChange}/>) }
-        <div className="FoodList-button-cluster">
+        { foods.map((food, idx) => (
+          <FoodItem
+            {...food}
+            key={idx}
+            no={idx}
+            handleItemChange={this.handleItemChange}/>
+        ))}
+        <div className="FoodList-button-cluster" ref={(buttons) => this.buttons = buttons}>
           <FloatingActionButton onClick={this.deleteFood}>
             <ContentDelete />
-          </FloatingActionButton >
+          </FloatingActionButton>
           <FloatingActionButton onClick={this.props.cancel}>
             <ContentCancel />
-          </FloatingActionButton >
+          </FloatingActionButton>
           <FloatingActionButton onClick={this.submitFoods}>
             <ContentSubmit />
-          </FloatingActionButton >
+          </FloatingActionButton>
           <FloatingActionButton onClick={this.addFood}>
             <ContentAdd />
-          </FloatingActionButton >
+          </FloatingActionButton>
         </div>
       </div>
     )

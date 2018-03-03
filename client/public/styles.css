@@ -67,10 +67,6 @@ body {
   margin: 2vh 2vw;
 }
 
-/*.add-food-button > * {
-  margin-right: 5vw;
-}*/
-
 .FoodItem-container {
   margin: 1vh 0;
   display: flex;
@@ -100,9 +96,21 @@ body {
 
 .PickupFoodItem-container {
   width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .PickupFoodItem-container > * {
-  width: 33%;
-  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0 1vh;
+  width: 100%;
+}
+
+.ClaimListing-button-cluster {
+  display: flex;
+}
+
+.ClaimListing-button-cluster > * {
+  margin: 1vh;
+  flex-grow: 1;
 }

@@ -1,20 +1,49 @@
 import React, { Component } from 'react';
 import { RaisedButton, TextField } from 'material-ui';
+import { RadioButtonGroup, RadioButton } from 'material-ui/RadioButton'
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
       email: '',
       password: '',
       confirm: '',
     }
-    this.handlePassword = this.handlePassword.bind(this);
+    this.handleAddress = this.handleAddress.bind(this);
+    this.handleCity = this.handleCity.bind(this);
+    this.handleState = this.handleState.bind(this);
+    this.handleZip = this.handleZip.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
     this.obscure = this.obscure.bind(this);
     this.keyQuery = this.keyQuery.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleAddress(e) {
+    var address = e.target.value;
+    this.setState({ address });
+  }
+
+  handleCity(e) {
+    var city = e.target.value;
+    this.setState({ city });
+  }
+
+  handleState(e) {
+    var state = e.target.value;
+    this.setState({ state });
+  }
+
+  handleZip(e) {
+    var zip = e.target.value;
+    this.setState({ zip });
   }
 
   handleEmail(e) {
@@ -22,14 +51,14 @@ export default class Signup extends Component {
     this.setState({ email });
   }
 
-  handlePassword(e) {
-    var password = e.target.value;
-    this.setState({ password });
-  }
-
   handleConfirm(e) {
     var confirm = e.target.value;
     this.setState({ confirm });
+  }
+
+  handlePassword(e) {
+    var password = e.target.value;
+    this.setState({ password });
   }
 
   obscure(e) {
@@ -37,7 +66,15 @@ export default class Signup extends Component {
   }
 
   clearFields() {
-    this.setState({ email: '', password: '', confirm: '' });
+    this.setState({
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        email: '',
+        password: '',
+        confirm: ''
+      });
     this.emailField.value = '';
     this.passwordField.value = '';
     this.confirmField.value = '';
@@ -56,6 +93,44 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="signup">
+        <RadioButtonGroup name="accountType">
+          <RadioButton
+            value="DONOR"
+            label="Donor"
+          />
+          <RadioButton
+            value="BANK"
+            label="Bank"
+          />
+        </RadioButtonGroup>
+        <TextField
+          floatingLabelText="Address"
+          value={this.state.address}
+          onChange={this.handleAddress}
+          ref={(addressField) => this.addressField = addressField}
+          onKeyDown={this.keyQuery}
+          />
+        <TextField
+          floatingLabelText="City"
+          value={this.state.city}
+          onChange={this.handleCity}
+          ref={(cityField) => this.cityField = cityField}
+          onKeyDown={this.keyQuery}
+          />
+        <TextField
+          floatingLabelText="State"
+          value={this.state.state}
+          onChange={this.handleState}
+          ref={(stateField) => this.stateField = stateField}
+          onKeyDown={this.keyQuery}
+          />
+        <TextField
+          floatingLabelText="Zip"
+          value={this.state.zip}
+          onChange={this.handleZip}
+          ref={(zipField) => this.zipField = zipField}
+          onKeyDown={this.keyQuery}
+          />
         <TextField
           floatingLabelText="Email"
           value={this.state.email}

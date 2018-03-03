@@ -11,7 +11,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           donor_id: 1,
-          bank_id: 2
+          bank_id: null
         }
       ]);
     });

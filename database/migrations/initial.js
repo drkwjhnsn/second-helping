@@ -2,6 +2,10 @@ exports.up = (knex) => {
   return knex.schema
     .createTable('users', (table) => {
       table.increments('id').primary();
+      table.string('address', 100);
+      table.string('city', 50);
+      table.string('state', 50);
+      table.string('zip', 15);
       table.string('email', 50).unique();
       table.string('type', 20);
       table.string('hash', 128);

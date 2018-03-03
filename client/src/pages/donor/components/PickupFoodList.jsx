@@ -6,10 +6,8 @@ import Paper from 'material-ui/paper';
 module.exports = (props) => {
   var { foods } = props;
   return (
-    <Paper>
-      <table className="PickupFoodList-container">
-        { props.foods.map((food) => (<PickupFoodItem { ...food } />))}
-      </table>
+    <Paper className="PickupFoodList-container">
+      { props.foods.map((food, idx) => (<PickupFoodItem { ...food } key={idx} />))}
     </Paper>
   )
 };

@@ -7,6 +7,7 @@ export default class Signup extends Component {
     super(props);
     this.state = {
       type: 'DONOR',
+      name: '',
       address: '',
       city: '',
       state: '',
@@ -16,6 +17,7 @@ export default class Signup extends Component {
       confirm: '',
     }
     this.handleType = this.handleType.bind(this);
+    this.handleName = this.handleName.bind(this);
     this.handleAddress = this.handleAddress.bind(this);
     this.handleCity = this.handleCity.bind(this);
     this.handleState = this.handleState.bind(this);
@@ -31,6 +33,11 @@ export default class Signup extends Component {
   handleType(e) {
     var type = e.target.value;
     this.setState({ type });
+  }
+
+  handleName(e) {
+    var name = e.target.value;
+    this.setState({ name });
   }
 
   handleAddress(e) {
@@ -75,6 +82,7 @@ export default class Signup extends Component {
   clearFields() {
     this.setState({
         type: 'DONOR',
+        name: 'name',
         address: '',
         city: '',
         state: '',
@@ -83,6 +91,7 @@ export default class Signup extends Component {
         password: '',
         confirm: ''
       });
+    this.nameField.value = '';
     this.addressField.value = '';
     this.cityField.value = '';
     this.stateField.value = '';
@@ -97,8 +106,8 @@ export default class Signup extends Component {
   }
 
   handleSubmit() {
-    var { type, address, city, state, zip, email, password } = this.state;
-    this.props.signup(type, address, city, state, zip, email, password);
+    var { type, name, address, city, state, zip, email, password } = this.state;
+    this.props.signup(type, name, address, city, state, zip, email, password);
     this.clearFields();
   }
 
@@ -118,6 +127,13 @@ export default class Signup extends Component {
             label="Bank"
           />
         </RadioButtonGroup>
+        <TextField
+          floatingLabelText="Name of company or organization"
+          value={this.state.name}
+          onChange={this.handleName}
+          ref={(nameField) => this.nameField = nameField}
+          onKeyDown={this.keyQuery}
+          />
         <TextField
           floatingLabelText="Address"
           value={this.state.address}

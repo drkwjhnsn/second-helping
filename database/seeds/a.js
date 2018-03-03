@@ -6,6 +6,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {
+          name: 'The Fat Lady',
           address: '201 Washington St',
           city: 'Oakland',
           state: 'CA',
@@ -16,6 +17,7 @@ exports.seed = function(knex, Promise) {
           salt: '391586258e7f71b4'
         },
         {
+          name: 'Lake Merrit Food Bank',
           address: '184 13th st',
           city: 'Oakland',
           state: 'CA',

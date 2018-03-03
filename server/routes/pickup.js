@@ -41,8 +41,16 @@ pickup.delete('/donor', (req, res) => {
 
 pickup.get('/bank', (req, res) => {
   var bank_id = req.session.userId;
-  new Pickup().query({ where: { bank_id: null }, orWhere: { bank_id } }).fetchAll({ withRelated: 'foods' })
+  new Pickup().query({ where: { bank_id: null }, orWhere: { bank_id } }).fetchAll({ withRelated: ['foods', 'donor'] })
   .then((pickups) => {
+
+    //this is the mildly hacky workaround to the lesson of keeping auth data in table apart from user data
+    pickups = pickups.serialize();
+    pickups.forEach((pickup) => {
+      delete pickup.donor.salt;
+      delete pickup.donor.hash;
+    });
+
     res.status(200).send(pickups);
   })
 });

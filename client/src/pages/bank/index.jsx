@@ -23,46 +23,46 @@ export default class Bank extends Component {
     this.fetchPickups();
   }
 
-  // setClaimPins() {
-  //   var claimPins = [];
-  //   this.state.claims.forEach((claim, idx) => {
-  //     // axios.get(`https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadowchld=A|FF0000|0000FF`)
-  //     // .then
-  //     claimPins.push(
-  //       new google.maps.Marker({
-  //         position: {lat: claim.address.lat, lng: claim.address.lng},
-  //         map: this.map
-  //       })
-  //     )
-  //   });
-  //   this.setState({claimPins});
-  // }
+  setClaimPins() {
+    var claimPins = [];
+    this.state.claims.forEach((claim, idx) => {
+      // axios.get(`https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadowchld=A|FF0000|0000FF`)
+      // .then
+      // claimPins.push(
+      //   new google.maps.Marker({
+      //     position: {lat: claim.address.lat, lng: claim.address.lng},
+      //     map: this.map
+      //   })
+      // )
+    });
+    // this.setState({claimPins});
+  }
 
-  // setPickupPins() {
-  //   var pickupPins = [];
-  //   this.state.pickups.forEach((pickup, idx) => {
-  //     pickupPins.push(
-  //       new google.maps.Marker({
-  //         position: {lat: pickup.address.lat, lng: pickup.address.lng},
-  //         map: this.map
-  //       })
-  //     )
-  //   });
-  //   this.setState({pickupPins});
-  // }
+  setPickupPins() {
+    // var pickupPins = [];
+    // this.state.pickups.forEach((pickup, idx) => {
+    //   pickupPins.push(
+    //     new google.maps.Marker({
+    //       position: {lat: pickup.address.lat, lng: pickup.address.lng},
+    //       map: this.map
+    //     })
+    //   )
+    // });
+    // this.setState({pickupPins});
+  }
 
   componentDidMount() {
     var { lat, lng } = this.props.user;
    this.map = new google.maps.Map(document.getElementById('map'),
     {center: { lat, lng }, zoom: 12});
-    console.log(this.map);
-    // this.setPickupPins();
+    this.setPickupPins();
     // this.setClaimPins();
   }
 
   fetchPickups() {
     return axios.get('/pickup/bank')
     .then(({ data }) => {
+      window.pickups = data;
       var pickups = data.filter((pickup) => !pickup.bank_id)
       var claims = data.filter((claim) => claim.bank_id)
       this.setState({ pickups, claims });

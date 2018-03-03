@@ -44,12 +44,22 @@ export default class App extends Component {
   }
 
   signup(type, name, address, city, state, zip, email, password) {
-    axios.post('/auth/signup', { type, name, address, city, state, zip, email, password })
+
+    confirmAddress({ address, city, state, zip })
     .then(({ data }) => {
-      console.log(data);
-      this.setState({ user: data });
-      this.handleClose();
+      if (!data.results[0]) return console.log('Address not confirmed!');
+      console.log('data:\n', data);
+      var location = data.results[0].geometry.location;
+      var { lat, lng } = location;
+      console.log('lat: ', lat, '\nlng: ', lng);
+      axios.post('/auth/signup', { type, name, address, city, state, zip, email, password, lat, lng })
+      .then(({ data }) => {
+        console.log(data);
+        this.setState({ user: data });
+        this.handleClose();
+      });
     });
+
   }
 
   logout() {
@@ -108,3 +118,16 @@ export default class App extends Component {
     );
   }
 };
+
+function confirmAddress({ address, city, state, zip }) {
+  var addressUrl = naturalToUrl(address);
+  var cityUrl = naturalToUrl(city);
+  var publicKey = 'AIzaSyD3aVRXSyFga516kCx1dhBpwOWr5WYNQ9Y';
+  var fullAddressUrl = `${addressUrl},+${cityUrl},+${state}+${zip}`;
+  var queryUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${fullAddressUrl}&key=${publicKey}`
+  return axios.get(queryUrl)
+}
+
+function naturalToUrl(naturalString) {
+  return naturalString.split(' ').join('+');
+}

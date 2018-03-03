@@ -49,6 +49,7 @@ export default class Donor extends Component {
     return (
       <div>
         <div className="donor-container">
+          <h1>{this.props.user.name}</h1>
           {
             pickups
             ? <PickupList pickups={pickups} />

@@ -52,9 +52,10 @@ export default class Bank extends Component {
   // }
 
   componentDidMount() {
-    // var { lat, lng } = this.props.user.address;
-   // this.map = new google.maps.Map(document.getElementById('map'),
-   //  {center: {lat, lng}, zoom: 12});
+    var { lat, lng } = this.props.user;
+   this.map = new google.maps.Map(document.getElementById('map'),
+    {center: { lat, lng }, zoom: 12});
+    console.log(this.map);
     // this.setPickupPins();
     // this.setClaimPins();
   }
@@ -95,13 +96,14 @@ export default class Bank extends Component {
     var { pickups, claims } = this.state;
     return (
       <div className="Bank">
-        <Paper className="map-placeholder">
-          <div id="map"></div>
-        </Paper>
+        <h1>{this.props.user.name}</h1>
         <div className="bank-lists">
           <PickupFeed pickups={pickups} accept={this.acceptClaim}/>
           <ClaimList claims={claims} cancelClaim={this.cancelClaim} completeClaim={this.completeClaim}/>
         </div>
+        <Paper className="map-container">
+          <div id="map"></div>
+        </Paper>
       </div>
     );
   }

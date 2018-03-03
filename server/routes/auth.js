@@ -37,9 +37,9 @@ auth.post('/signin', (req, res) => {
 })
 
 auth.post('/signup', (req, res) => {
-  var { type, name, address, city, state, zip, email, password } = req.body;
+  var { type, name, address, city, state, zip, email, password, lat, lng } = req.body;
   var { salt, hash } = saltHashPassword(password);
-  new User({ address, name, city, state, zip, email, salt, hash, type }).save()
+  new User({ address, name, city, state, zip, email, salt, hash, type, lat, lng }).save()
   .then((user) => {
     user = user.toJSON();
     delete user.salt;

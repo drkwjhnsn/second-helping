@@ -1,3 +1,4 @@
+
 input:-webkit-autofill {
     -webkit-box-shadow: inset 0 0 0px 50px white;
 }
@@ -113,4 +114,14 @@ body {
 .ClaimListing-button-cluster > * {
   margin: 1vh;
   flex-grow: 1;
+}
+
+.map-conatiner {
+  margin: 1vh 0;
+  width: 100%;
+}
+
+#map {
+  width: 100%;
+  height: 50vh;
 }

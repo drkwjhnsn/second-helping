@@ -3,6 +3,8 @@ exports.up = (knex) => {
     .createTable('users', (table) => {
       table.increments('id').primary();
       table.string('name', 100);
+      table.string('lat', 20);
+      table.string('lng', 20);
       table.string('address', 100);
       table.string('city', 50);
       table.string('state', 50);

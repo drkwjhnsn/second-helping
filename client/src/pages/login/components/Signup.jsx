@@ -85,8 +85,8 @@ export default class Signup extends Component {
   }
 
   handleSubmit() {
-    var { email, password } = this.state;
-    this.props.signup(email, password);
+    var { address, city, state, zip, email, password } = this.state;
+    this.props.signup(address, city, state, email, password);
     this.clearFields();
   }
 

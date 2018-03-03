@@ -43,8 +43,8 @@ export default class App extends Component {
     });
   }
 
-  signup(email, password) {
-    axios.post('/auth/signup', { email, password })
+  signup(address, city, state, zip, email, password) {
+    axios.post('/auth/signup', { address, city, state, zip, email, password })
     .then(({ data }) => {
       console.log(data);
       this.setState({ user: data });

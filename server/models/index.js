@@ -3,25 +3,14 @@ var knex = require('knex')(config);
 var bookshelf = require('bookshelf')(knex);
 
 var User = bookshelf.Model.extend({
-  tableName: 'users'
-});
-
-var Pickup = bookshelf.Model.extend({
-  tableName: 'pickups',
-  donor: function () {
-    // console.dir(this.belongsTo(User, 'donor_id'), {depth: 5, colors: true});
-    return this.belongsTo(User, 'donor_id')
-  },
-  bank: function () {
-    return this.belongsTo(User, 'bank_id')
-  },
-  foods: function () {return this.hasMany(Food)}
-  // important: arrow functions don't work here, they mess with the context!
+  tableName: 'users',
+  affiliates: function() {return this.belongsToMany(User)}
 });
 
 var Food = bookshelf.Model.extend({
   tableName: 'foods',
-  pickup: () => this.belongsTo(Pickup)
+  donors: function() {return this.belongsTo(User, 'donor_id')},
+  claimants: function() {return this.belongsTo(User, 'claimant_id')}
 });
 
-module.exports = { User, Pickup, Food };
+module.exports = { User, Food };

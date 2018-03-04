@@ -13,15 +13,22 @@ exports.up = (knex) => {
       table.string('type', 20);
       table.string('hash', 128);
       table.string('salt', 16);
+      table.boolean('available');
     })
-    .createTable('pickups', (table) => {
+    // .createTable('pickups', (table) => {
+    //   table.increments('id').primary();
+    //   table.integer('donor_id').references('users.id');
+    //   table.integer('bank_id').references('users.id');
+    // })
+    .createTable('donors_claimants', (table) => {
       table.increments('id').primary();
       table.integer('donor_id').references('users.id');
-      table.integer('bank_id').references('users.id');
+      table.integer('claimant_id').references('users.id');
     })
     .createTable('foods', (table) => {
       table.increments('id').primary();
-      table.integer('pickup_id').references('pickups.id');
+      table.integer('donor_id').references('users.id');
+      table.integer('claimant_id').references('users.id');
       table.string('description', 256);
       table.string('expiry', 128);
       table.string('quantity', 128);
@@ -31,6 +38,7 @@ exports.up = (knex) => {
 exports.down = (knex) => {
   return knex.schema
     .dropTable('foods')
-    .dropTable('pickups')
+    // .dropTable('pickups')
+    .dropTable('donors_claimants')
     .dropTable('users');
 };
